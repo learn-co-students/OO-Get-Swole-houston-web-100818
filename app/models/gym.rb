@@ -1,24 +1,23 @@
+require 'pry'
 class Gym
- ALL = []
+ @@all = []
 
-  attr_reader :name
+  attr_accessor :name
 
   def initialize(name)
     @name = name
-    ALL << self
+    @@all << self
 
   end
 
   def self.all
-    ALL
+    @@all
   end
 
   def memberships
     #Access all memberships => [Memberships]
     #determine wheter or not the membership belongs to this gym (self)
-    Membership.all.select do |m|
-      m.gym == self
-    end
+    Membership.all.select {|m| m.gym == self}
   end
   
   def lifters
@@ -38,7 +37,7 @@ class Gym
     end
   end
 
-  def total_lifter_liftable_weight
+  def lift_total_for_gym
     lifter_liftable_weight = 0
     #get lifters
     self.lifters.each do |l|
@@ -47,5 +46,6 @@ class Gym
     end
     lifter_liftable_weight
   end
-
 end
+
+
