@@ -3,7 +3,7 @@ class Lifter
   @@all = []
 
 
-  attr_reader :name, :lift_total
+  attr_accessor :name, :lift_total
 
   def initialize(name, lift_total)
     @name = name
@@ -36,6 +36,18 @@ class Lifter
 
   def self.all 
     @@all
+  end
+
+  def self.average_lift
+    sum = 0
+    arr = self.all.each {|i| sum += i.lift_total }
+    sum / arr.length
+  end
+
+  def total_cost
+    sum = 0
+    self.memberships.map {|i| sum += i.cost}
+    sum
   end
 
 end
